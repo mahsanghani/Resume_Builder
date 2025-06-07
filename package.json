@@ -1,0 +1,31 @@
+{
+  "name": "resume-generator-fullstack",
+  "version": "1.0.0",
+  "description": "Full-stack AI Resume Generator",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd backend && npm run dev",
+    "client": "cd frontend && npm start",
+    "build": "cd frontend && npm run build",
+    "heroku-postbuild": "cd frontend && npm install && npm run build",
+    "start": "cd backend && npm start",
+    "test": "cd backend && npm test && cd ../frontend && npm test -- --watchAll=false",
+    "deploy": "./deploy.sh production"
+  },
+  "engines": {
+    "node": "18.x",
+    "npm": "8.x"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  },
+  "keywords": [
+    "resume",
+    "generator",
+    "react",
+    "express",
+    "fullstack"
+  ],
+  "author": "Resume Generator Team",
+  "license": "MIT"
+}
