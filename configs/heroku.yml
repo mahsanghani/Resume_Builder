@@ -1,0 +1,8 @@
+build:
+  docker:
+    web: backend/Dockerfile
+  config:
+    REACT_APP_API_URL: https://your-app-name.herokuapp.com
+
+run:
+  web: npm start
