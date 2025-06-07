@@ -488,7 +488,7 @@ ${projectsSection}
             <div className="bg-white border border-gray-200 rounded-xl p-5 mb-5">
                 <div className="flex items-center gap-4 mb-5 pb-4 border-b border-gray-200">
                     {data.avatar && (
-                        <img src={data.avatar} alt="Profile" className="w-15 h-15 rounded-full border-2 border-gray-200" />
+                        <img src={data.avatar} alt="Profile" className="w-16 h-16 rounded-full border-2 border-gray-200" />
                     )}
                     <div>
                         <h4 className="text-xl font-semibold text-gray-800 m-0">{data.name}</h4>
@@ -540,7 +540,7 @@ ${projectsSection}
                     <div className="mt-4">
                         {data.experience && data.experience.length > 0 ? (
                             data.experience.map((exp, index) => (
-                                <div key={index} className="border-l-3 border-indigo-600 pl-4 mb-4">
+                                <div key={index} className="border-l-4 border-indigo-600 pl-4 mb-4">
                                     <h5 className="text-gray-800 font-semibold m-0">{exp.position} at {exp.company}</h5>
                                     <p className="text-gray-600 text-sm my-1">{exp.duration}</p>
                                     <p className="text-gray-600 text-sm my-1">{exp.responsibilities ? exp.responsibilities.length : 0} responsibilities listed</p>
@@ -584,185 +584,184 @@ ${projectsSection}
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-indigo-400 to-purple-600 p-5">
-            <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden">
-                {/* Header */}
-                <div className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-10 text-center">
-                    <h1 className="text-4xl font-bold mb-2">🎯 AI Resume Generator</h1>
-                    <p className="text-lg opacity-90">Generate professional LaTeX resumes from profile data</p>
-                </div>
-
-                <div className="p-10">
-                    {/* Configuration Section */}
-                    <div className="mb-8 p-6 bg-gray-50 rounded-xl border border-gray-200">
-                        <h3 className="text-xl font-semibold text-gray-800 mb-5 flex items-center gap-2">
-                            📡 Data Source Configuration
-                        </h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
-                            <div>
-                                <label className="block font-semibold mb-2 text-gray-700 text-sm">
-                                    Profile Scraper API URL:
-                                </label>
-                                <input
-                                    type="url"
-                                    value={apiBaseUrl}
-                                    onChange={(e) => setApiBaseUrl(e.target.value)}
-                                    placeholder="Enter your Cloud Function URL"
-                                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg text-base transition-all focus:outline-none focus:border-indigo-600 focus:ring-0 focus:ring-indigo-600 focus:ring-opacity-10"
-                                />
-                            </div>
-                            <div>
-                                <label className="block font-semibold mb-2 text-gray-700 text-sm">
-                                    Data Source Type:
-                                </label>
-                                <select
-                                    value={dataSource}
-                                    onChange={handleDataSourceChange}
-                                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg text-base transition-all focus:outline-none focus:border-indigo-600 focus:ring-0 focus:ring-indigo-600 focus:ring-opacity-10"
-                                >
-                                    <option value="github">GitHub Profile</option>
-                                    <option value="linkedin">LinkedIn Profile</option>
-                                    <option value="website">Personal Website</option>
-                                    <option value="portfolio">Portfolio Site</option>
-                                    <option value="url">Direct URL</option>
-                                </select>
-                            </div>
+        <div className="min-h-screen bg-gradient-to-br from-indigo-500 to-purple-600 p-4">
+            <div className="max-w-4xl mx-auto">
+                <div className="bg-white rounded-2xl shadow-2xl min-h-[calc(100vh-2rem)]">
+                    {/* Header */}
+                    <div className="bg-gradient-to-r from-indigo-600 to-purple-700 text-white p-8 rounded-t-2xl">
+                        <div className="text-center">
+                            <h1 className="text-4xl font-bold mb-2">🎯 AI Resume Generator</h1>
+                            <p className="text-lg opacity-90">Generate professional LaTeX resumes from profile data</p>
                         </div>
                     </div>
 
-                    {/* Input Section */}
-                    <div className="mb-8 p-6 bg-gray-50 rounded-xl border border-gray-200">
-                        <h3 className="text-xl font-semibold text-gray-800 mb-5 flex items-center gap-2">
-                            👤 Profile Information
-                        </h3>
-
-                        {!isUrlType() ? (
-                            <div className="mb-5">
-                                <label className="block font-semibold mb-2 text-gray-700 text-sm">
-                                    {getInputLabel()}
-                                </label>
-                                <input
-                                    type="text"
-                                    value={userId}
-                                    onChange={(e) => setUserId(e.target.value)}
-                                    placeholder={getInputPlaceholder()}
-                                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg text-base transition-all focus:outline-none focus:border-indigo-600 focus:ring-0 focus:ring-indigo-600 focus:ring-opacity-10"
-                                />
+                    <div className="p-8 space-y-8">
+                        {/* Configuration Section */}
+                        <div className="bg-gray-50 rounded-xl border border-gray-200 p-6">
+                            <h3 className="text-xl font-semibold text-gray-800 mb-5 flex items-center gap-2">
+                                📡 Data Source Configuration
+                            </h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <div>
+                                    <label className="block font-semibold mb-2 text-gray-700 text-sm">
+                                        Profile Scraper API URL:
+                                    </label>
+                                    <input
+                                        type="url"
+                                        value={apiBaseUrl}
+                                        onChange={(e) => setApiBaseUrl(e.target.value)}
+                                        placeholder="Enter your Cloud Function URL"
+                                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg text-base transition-all duration-200 focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-600 focus:ring-opacity-20"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block font-semibold mb-2 text-gray-700 text-sm">
+                                        Data Source Type:
+                                    </label>
+                                    <select
+                                        value={dataSource}
+                                        onChange={handleDataSourceChange}
+                                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg text-base transition-all duration-200 focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-600 focus:ring-opacity-20"
+                                    >
+                                        <option value="github">GitHub Profile</option>
+                                        <option value="linkedin">LinkedIn Profile</option>
+                                        <option value="website">Personal Website</option>
+                                        <option value="portfolio">Portfolio Site</option>
+                                        <option value="url">Direct URL</option>
+                                    </select>
+                                </div>
                             </div>
-                        ) : (
+                        </div>
+
+                        {/* Input Section */}
+                        <div className="bg-gray-50 rounded-xl border border-gray-200 p-6">
+                            <h3 className="text-xl font-semibold text-gray-800 mb-5 flex items-center gap-2">
+                                👤 Profile Information
+                            </h3>
+
                             <div className="mb-5">
                                 <label className="block font-semibold mb-2 text-gray-700 text-sm">
                                     {getInputLabel()}
                                 </label>
-                                <input
-                                    type="url"
-                                    value={profileUrl}
-                                    onChange={(e) => setProfileUrl(e.target.value)}
-                                    placeholder={getInputPlaceholder()}
-                                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg text-base transition-all focus:outline-none focus:border-indigo-600 focus:ring-0 focus:ring-indigo-600 focus:ring-opacity-10"
-                                />
+                                {!isUrlType() ? (
+                                    <input
+                                        type="text"
+                                        value={userId}
+                                        onChange={(e) => setUserId(e.target.value)}
+                                        placeholder={getInputPlaceholder()}
+                                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg text-base transition-all duration-200 focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-600 focus:ring-opacity-20"
+                                    />
+                                ) : (
+                                    <input
+                                        type="url"
+                                        value={profileUrl}
+                                        onChange={(e) => setProfileUrl(e.target.value)}
+                                        placeholder={getInputPlaceholder()}
+                                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg text-base transition-all duration-200 focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-600 focus:ring-opacity-20"
+                                    />
+                                )}
+                            </div>
+
+                            <div className="flex gap-3 justify-center flex-wrap">
+                                <button
+                                    onClick={generateResume}
+                                    disabled={loading}
+                                    className="bg-gradient-to-r from-indigo-600 to-purple-700 text-white border-none px-7 py-3.5 rounded-lg text-base font-semibold cursor-pointer transition-all duration-200 inline-flex items-center gap-2 hover:shadow-lg disabled:opacity-60 disabled:cursor-not-allowed hover:scale-105"
+                                >
+                                    <span>🚀</span> Generate Resume
+                                </button>
+
+                                {dataSource === 'github' && (
+                                    <button
+                                        onClick={testGithubFunction}
+                                        className="bg-gradient-to-r from-green-600 to-teal-600 text-white border-none px-7 py-3.5 rounded-lg text-base font-semibold cursor-pointer transition-all duration-200 inline-flex items-center gap-2 hover:shadow-lg hover:scale-105"
+                                    >
+                                        <span>🧪</span> Test GitHub API
+                                    </button>
+                                )}
+
+                                {dataSource === 'linkedin' && (
+                                    <button
+                                        onClick={testLinkedinFunction}
+                                        className="bg-gradient-to-r from-green-600 to-teal-600 text-white border-none px-7 py-3.5 rounded-lg text-base font-semibold cursor-pointer transition-all duration-200 inline-flex items-center gap-2 hover:shadow-lg hover:scale-105"
+                                    >
+                                        <span>🧪</span> Test LinkedIn Function
+                                    </button>
+                                )}
+                            </div>
+
+                            <div className="bg-blue-50 border border-blue-200 text-blue-800 mt-4 p-3 rounded-lg text-sm">
+                                <strong>💡 Platform-Specific Functions Available:</strong><br />
+                                • <code>fetchGithubProfileData(username)</code> - Direct GitHub API access<br />
+                                • <code>fetchLinkedinProfileData(profileId)</code> - LinkedIn with fallback<br />
+                                • Test buttons appear when selecting GitHub or LinkedIn platforms
+                            </div>
+                        </div>
+
+                        {/* Loading State */}
+                        {loading && (
+                            <div className="text-center py-8 text-gray-600">
+                                <div className="border-4 border-gray-200 border-t-indigo-600 rounded-full w-10 h-10 animate-spin mx-auto mb-4"></div>
+                                <p>Fetching profile data and generating resume...</p>
                             </div>
                         )}
 
-                        <div className="flex gap-2.5 justify-center flex-wrap">
-                            <button
-                                onClick={generateResume}
-                                disabled={loading}
-                                className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white border-none px-7 py-3.5 rounded-lg text-base font-semibold cursor-pointer transition-all inline-flex items-center gap-2 hover:transform hover:-translate-y-0.5 hover:shadow-lg disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none"
-                            >
-                                <span>🚀</span> Generate Resume
-                            </button>
+                        {/* Messages */}
+                        {message.text && (
+                            <div className={`p-4 rounded-lg font-medium ${
+                                message.type === 'error'
+                                    ? 'bg-red-50 border border-red-200 text-red-700'
+                                    : 'bg-green-50 border border-green-200 text-green-700'
+                            }`}>
+                                <div dangerouslySetInnerHTML={{ __html: message.text }} />
+                            </div>
+                        )}
 
-                            {dataSource === 'github' && (
-                                <button
-                                    onClick={testGithubFunction}
-                                    className="bg-gradient-to-r from-green-600 to-teal-600 text-white border-none px-7 py-3.5 rounded-lg text-base font-semibold cursor-pointer transition-all inline-flex items-center gap-2 hover:transform hover:-translate-y-0.5 hover:shadow-lg"
-                                >
-                                    <span>🧪</span> Test GitHub API
-                                </button>
-                            )}
+                        {/* Profile Preview */}
+                        {showProfileSection && currentProfileData && (
+                            <div className="bg-gray-50 rounded-xl border border-gray-200 p-6">
+                                <h3 className="text-xl font-semibold text-gray-800 mb-5 flex items-center gap-2">
+                                    📋 Fetched Profile Data
+                                </h3>
+                                <ProfilePreview data={currentProfileData} />
+                            </div>
+                        )}
 
-                            {dataSource === 'linkedin' && (
-                                <button
-                                    onClick={testLinkedinFunction}
-                                    className="bg-gradient-to-r from-green-600 to-teal-600 text-white border-none px-7 py-3.5 rounded-lg text-base font-semibold cursor-pointer transition-all inline-flex items-center gap-2 hover:transform hover:-translate-y-0.5 hover:shadow-lg"
-                                >
-                                    <span>🧪</span> Test LinkedIn Function
-                                </button>
-                            )}
-                        </div>
+                        {/* LaTeX Preview */}
+                        {showLatexSection && currentLatexContent && (
+                            <div className="bg-gray-50 rounded-xl border border-gray-200 p-6">
+                                <h3 className="text-xl font-semibold text-gray-800 mb-5 flex items-center gap-2">
+                                    📄 Generated LaTeX Resume
+                                </h3>
+                                <div className="bg-gray-900 text-gray-100 p-5 rounded-lg font-mono text-sm max-h-96 overflow-auto leading-6">
+                                    <pre className="whitespace-pre-wrap">{currentLatexContent}</pre>
+                                </div>
 
-                        <div className="bg-blue-50 border border-blue-200 text-blue-800 mt-4 p-3 rounded-lg text-sm">
-                            <strong>💡 Platform-Specific Functions Available:</strong><br />
-                            • <code>fetchGithubProfileData(username)</code> - Direct GitHub API access<br />
-                            • <code>fetchLinkedinProfileData(profileId)</code> - LinkedIn with fallback<br />
-                            • Test buttons appear when selecting GitHub or LinkedIn platforms
-                        </div>
+                                <div className="flex gap-3 justify-center flex-wrap mt-5">
+                                    <button
+                                        onClick={downloadPDF}
+                                        className="bg-gradient-to-r from-indigo-600 to-purple-700 text-white border-none px-7 py-3.5 rounded-lg text-base font-semibold cursor-pointer transition-all duration-200 inline-flex items-center gap-2 hover:shadow-lg hover:scale-105"
+                                    >
+                                        <span>📥</span> Download PDF Resume
+                                    </button>
+                                    <button
+                                        onClick={downloadLatex}
+                                        className="bg-gradient-to-r from-green-600 to-teal-600 text-white border-none px-7 py-3.5 rounded-lg text-base font-semibold cursor-pointer transition-all duration-200 inline-flex items-center gap-2 hover:shadow-lg hover:scale-105"
+                                    >
+                                        <span>📝</span> Download LaTeX Source
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Success Message */}
+                        {showDownloadSuccess && (
+                            <div className="text-center p-6 bg-green-50 rounded-xl border border-green-200">
+                                <h3 className="text-green-700 mb-2">✅ Resume Generated Successfully!</h3>
+                                <p className="text-green-600">Your professional resume has been generated and downloaded.</p>
+                            </div>
+                        )}
                     </div>
-
-                    {/* Loading State */}
-                    {loading && (
-                        <div className="text-center py-8 text-gray-600">
-                            <div className="border-3 border-gray-200 border-t-indigo-600 rounded-full w-10 h-10 animate-spin mx-auto mb-4"></div>
-                            <p>Fetching profile data and generating resume...</p>
-                        </div>
-                    )}
-
-                    {/* Messages */}
-                    {message.text && (
-                        <div className={`p-3 rounded-lg mb-5 font-medium ${
-                            message.type === 'error'
-                                ? 'bg-red-50 border border-red-200 text-red-700'
-                                : 'bg-green-50 border border-green-200 text-green-700'
-                        }`}>
-                            <div dangerouslySetInnerHTML={{ __html: message.text }} />
-                        </div>
-                    )}
-
-                    {/* Profile Preview */}
-                    {showProfileSection && currentProfileData && (
-                        <div className="mb-8 p-6 bg-gray-50 rounded-xl border border-gray-200">
-                            <h3 className="text-xl font-semibold text-gray-800 mb-5 flex items-center gap-2">
-                                📋 Fetched Profile Data
-                            </h3>
-                            <ProfilePreview data={currentProfileData} />
-                        </div>
-                    )}
-
-                    {/* LaTeX Preview */}
-                    {showLatexSection && currentLatexContent && (
-                        <div className="mb-8 p-6 bg-gray-50 rounded-xl border border-gray-200">
-                            <h3 className="text-xl font-semibold text-gray-800 mb-5 flex items-center gap-2">
-                                📄 Generated LaTeX Resume
-                            </h3>
-                            <div className="bg-gray-900 text-gray-100 p-5 rounded-lg font-mono text-sm overflow-x-auto max-h-96 overflow-y-auto my-5 leading-6">
-                                <pre>{currentLatexContent}</pre>
-                            </div>
-
-                            <div className="flex gap-2.5 justify-center flex-wrap">
-                                <button
-                                    onClick={downloadPDF}
-                                    className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white border-none px-7 py-3.5 rounded-lg text-base font-semibold cursor-pointer transition-all inline-flex items-center gap-2 hover:transform hover:-translate-y-0.5 hover:shadow-lg"
-                                >
-                                    <span>📥</span> Download PDF Resume
-                                </button>
-                                <button
-                                    onClick={downloadLatex}
-                                    className="bg-gradient-to-r from-green-600 to-teal-600 text-white border-none px-7 py-3.5 rounded-lg text-base font-semibold cursor-pointer transition-all inline-flex items-center gap-2 hover:transform hover:-translate-y-0.5 hover:shadow-lg"
-                                >
-                                    <span>📝</span> Download LaTeX Source
-                                </button>
-                            </div>
-                        </div>
-                    )}
-
-                    {/* Success Message */}
-                    {showDownloadSuccess && (
-                        <div className="text-center p-6 bg-green-50 rounded-xl border border-green-200 mt-5">
-                            <h3 className="text-green-700 mb-2">✅ Resume Generated Successfully!</h3>
-                            <p className="text-green-600">Your professional resume has been generated and downloaded.</p>
-                        </div>
-                    )}
                 </div>
             </div>
         </div>
