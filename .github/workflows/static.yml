@@ -47,7 +47,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'frontend/build'  # Deploy built files only
+          path: 'frontend/src'  # Deploy built files only
       
       - name: Deploy to GitHub Pages
         id: deployment
