@@ -26,50 +26,115 @@ A modern, user-friendly web application for creating professional resumes with c
 
 ## 🛠️ Technologies Used
 
-- **Frontend**: HTML5, CSS3, JavaScript
-- **Styling**: CSS3 / Bootstrap / Tailwind CSS
-- **PDF Generation**: jsPDF / html2pdf
+### Frontend
+- **Framework**: React.js / Vue.js
+- **Styling**: CSS3, responsive design
+- **Build Tools**: Webpack, npm/yarn
+- **Server**: Nginx (for production)
+
+### Backend
+- **Runtime**: Node.js
+- **Cloud Functions**: Firebase Functions
+- **Database**: Firebase Firestore
+- **Authentication**: Firebase Auth
+- **Testing**: Jest
+
+### DevOps & Deployment
+- **Containerization**: Docker & Docker Compose
+- **CI/CD**: GitHub Actions
+- **Cloud Platform**: Firebase
 - **Version Control**: Git & GitHub
+
+## 📋 Getting Started
 
 ## 📋 Getting Started
 
 ### Prerequisites
 
-- Web browser (Chrome, Firefox, Safari, etc.)
-- Text editor or IDE (VS Code recommended)
-- Git (for cloning the repository)
+- **Node.js** (v14 or higher)
+- **npm** or **yarn**
+- **Docker** (optional, for containerized deployment)
+- **Firebase CLI** (for backend deployment)
+- **Git** (for cloning the repository)
 
 ### Installation
+
+#### Option 1: Local Development
 
 1. **Clone the repository**
    ```bash
    git clone https://github.com/mahsanghani/Resume_Builder.git
-   ```
-
-2. **Navigate to the project directory**
-   ```bash
    cd Resume_Builder
    ```
 
-3. **Open in browser**
+2. **Set up the Backend**
    ```bash
-   # Simply open index.html in your preferred browser
-   # Or use a local server:
-   python -m http.server 8000
-   # Then visit http://localhost:8000
+   cd backend/functions
+   npm install
+   
+   # Copy environment variables
+   cp .env.example .env
+   # Edit .env with your Firebase configuration
    ```
+
+3. **Set up the Frontend**
+   ```bash
+   cd ../../frontend
+   npm install
+   
+   # Copy environment variables
+   cp .env.example .env
+   # Edit .env with your API endpoints
+   ```
+
+4. **Start Development Servers**
+   ```bash
+   # Terminal 1 - Backend (Firebase Functions)
+   cd backend/functions
+   npm run serve
+   
+   # Terminal 2 - Frontend
+   cd frontend
+   npm start
+   ```
+
+#### Option 2: Docker Development
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/mahsanghani/Resume_Builder.git
+   cd Resume_Builder
+   ```
+
+2. **Run with Docker Compose**
+   ```bash
+   docker-compose up --build
+   ```
+
+3. **Access the application**
+   - Frontend: http://localhost:3000
+   - Backend: http://localhost:5001
+
+### Deployment
+
+Run the deployment script:
+```bash
+./deploy.sh
+```
+
+Or deploy using GitHub Actions by pushing to the main branch.
 
 ## 📖 Usage
 
 1. **Start Building**: Open the application and click "Create New Resume"
 2. **Choose Template**: Select from available professional templates
 3. **Fill Information**: Complete each section with your details:
-    - Personal Information
-    - Professional Summary
-    - Work Experience
-    - Education
-    - Skills
-    - Additional Sections (Projects, Certifications, etc.)
+   - Personal Information
+   - Professional Summary
+   - Work Experience
+   - Education
+   - Skills
+   - Additional Sections (Projects, Certifications, etc.)
 4. **Preview**: Review your resume in real-time
 5. **Download**: Export as PDF or print your completed resume
 
@@ -77,22 +142,40 @@ A modern, user-friendly web application for creating professional resumes with c
 
 ```
 Resume_Builder/
-├── index.html              # Main application page
-├── css/
-│   ├── style.css           # Main stylesheet
-│   └── responsive.css      # Mobile responsiveness
-├── js/
-│   ├── app.js              # Main application logic
-│   ├── templates.js        # Resume templates
-│   └── pdf-generator.js    # PDF export functionality
-├── assets/
-│   ├── images/             # Template previews and icons
-│   └── fonts/              # Custom fonts
-├── templates/
-│   ├── classic.html        # Classic resume template
-│   ├── modern.html         # Modern resume template
-│   └── minimal.html        # Minimal resume template
-└── README.md
+├── .github/
+│   └── workflows/
+│       └── deploy.yml          # GitHub Actions deployment workflow
+├── backend/
+│   ├── functions/
+│   │   ├── test/
+│   │   │   ├── index.test.js   # Backend tests
+│   │   │   └── test.js         # Test utilities
+│   │   ├── .env.example        # Environment variables template
+│   │   ├── .eslintrc.js        # ESLint configuration
+│   │   ├── index.js            # Firebase Functions entry point
+│   │   └── node_modules/       # Backend dependencies
+│   ├── .firebaserc            # Firebase project configuration
+│   ├── Dockerfile             # Backend Docker configuration
+│   ├── firebase.json          # Firebase settings
+│   ├── package.json           # Backend dependencies
+│   └── package-lock.json      # Backend dependency lock file
+├── configs/                   # Configuration files
+├── docs/                      # Project documentation
+├── frontend/
+│   ├── node_modules/          # Frontend dependencies
+│   ├── public/                # Static assets
+│   ├── src/                   # React/Vue source code
+│   ├── .env                   # Frontend environment variables
+│   ├── .gitignore             # Frontend gitignore
+│   ├── Dockerfile             # Frontend Docker configuration
+│   ├── nginx.conf             # Nginx server configuration
+│   ├── package.json           # Frontend dependencies
+│   └── package-lock.json      # Frontend dependency lock file
+├── .gitignore                 # Root gitignore
+├── deploy.sh                  # Deployment script
+├── docker-compose.yml         # Multi-container Docker setup
+├── package.json               # Root package configuration
+└── README.md                  # Project documentation
 ```
 
 ## 🎨 Available Templates
@@ -124,9 +207,19 @@ We welcome contributions! Please follow these steps:
 ### Contribution Guidelines
 
 - Follow existing code style and conventions
-- Test your changes thoroughly
+- Run tests before submitting PRs:
+  ```bash
+  # Backend tests
+  cd backend/functions
+  npm test
+  
+  # Frontend tests (if available)
+  cd frontend
+  npm test
+  ```
 - Update documentation as needed
 - Ensure responsive design compatibility
+- Test Docker builds locally before pushing
 
 ## 🐛 Bug Reports & Feature Requests
 
@@ -139,13 +232,16 @@ Found a bug or have a feature request? Please open an issue:
 
 ## 📝 Roadmap
 
-- [ ] User authentication and cloud storage
-- [ ] More template options
-- [ ] Cover letter builder
-- [ ] LinkedIn integration
-- [ ] Resume analytics and tips
+- [ ] Enhanced user authentication (Google, GitHub OAuth)
+- [ ] Real-time collaborative editing
+- [ ] Advanced template customization
+- [ ] Resume analytics and performance insights
+- [ ] Integration with job boards (LinkedIn, Indeed)
+- [ ] AI-powered content suggestions
 - [ ] Multi-language support
-- [ ] ATS (Applicant Tracking System) optimization
+- [ ] Mobile app development
+- [ ] Resume version control and history
+- [ ] Team/organization accounts
 
 ## 📄 License
 
@@ -155,7 +251,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Mahsan Ghani**
 - GitHub: [@mahsanghani](https://github.com/mahsanghani)
-- LinkedIn: [Ahsan Ghani](https://www.linkedin.com/in/mahsanghani/)
+- LinkedIn: [Your LinkedIn Profile](https://linkedin.com/in/your-profile)
 
 ## 🙏 Acknowledgments
 
