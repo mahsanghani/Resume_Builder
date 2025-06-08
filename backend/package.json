@@ -2,12 +2,12 @@
   "name": "resume-generator-functions",
   "description": "Firebase Cloud Functions for Resume Generator",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "functions/index.js",
   "engines": {
     "node": "18"
   },
   "scripts": {
-    "lint": "eslint .",
+    "lint": "eslint functions",
     "serve": "firebase emulators:start --only functions",
     "shell": "firebase functions:shell",
     "start": "npm run shell",
