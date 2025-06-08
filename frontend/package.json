@@ -21,7 +21,8 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "tailwindcss": "^3.3.0",
+    "firebase-tools": "^12.5.4",
+    "tailwindcss": "^3.3.3",
     "postcss": "^8.4.24",
     "autoprefixer": "^10.4.14",
     "eslint": "^8.45.0",
@@ -36,6 +37,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "dev": "react-scripts start",
     "lint": "eslint src/**/*.{js,jsx}",
     "lint:fix": "eslint src/**/*.{js,jsx} --fix",
     "format": "prettier --write src/**/*.{js,jsx,css,json}",
@@ -43,7 +45,11 @@
     "build:analyze": "npm run build && npx webpack-bundle-analyzer build/static/js/*.js",
     "test:coverage": "npm test -- --coverage --watchAll=false",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "firebase:serve": "firebase emulators:start",
+    "firebase:deploy": "npm run build && firebase deploy",
+    "firebase:functions": "firebase deploy --only functions",
+    "firebase:hosting": "npm run build && firebase deploy --only hosting"
   },
   "eslintConfig": {
     "extends": [
