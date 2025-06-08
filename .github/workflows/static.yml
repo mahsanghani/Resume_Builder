@@ -33,7 +33,6 @@ jobs:
       - name: Install dependencies
         run: |
           cd frontend
-          npm ci
           npm install @tailwindcss/postcss --save-dev
           npm install --legacy-peer-deps
 
