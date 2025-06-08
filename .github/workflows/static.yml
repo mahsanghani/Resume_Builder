@@ -33,7 +33,7 @@ jobs:
       - name: Install dependencies
         run: |
           cd frontend
-          npm install
+          npm ci --force
 
       - name: Build React app
         run: |
