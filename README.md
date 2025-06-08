@@ -15,7 +15,7 @@ A modern, user-friendly web application for creating professional resumes with c
 
 ## 🚀 Demo
 
-[Live Demo](https://your-demo-link-here.com) <!-- Add your deployment link -->
+[Live Demo](https://mahsanghani.github.io/Resume_Builder/)
 
 ## 📸 Screenshots
 
