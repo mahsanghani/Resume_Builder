@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic Meta Tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#4f46e5" />
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="AI Resume Generator - Create professional LaTeX resumes from GitHub, LinkedIn, and other profile data sources. Generate stunning resumes in seconds." />
+    <meta name="keywords" content="resume generator, AI resume, LaTeX resume, GitHub profile, LinkedIn resume, professional resume, CV generator" />
+    <meta name="author" content="AI Resume Generator" />
+
+    <!-- Open Graph Meta Tags for Social Sharing -->
+    <meta property="og:title" content="AI Resume Generator - Professional Resume Creation" />
+    <meta property="og:description" content="Generate professional LaTeX resumes from your GitHub, LinkedIn, and other profile data sources." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="%PUBLIC_URL%" />
+    <meta property="og:image" content="%PUBLIC_URL%/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="AI Resume Generator" />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AI Resume Generator - Professional Resume Creation" />
+    <meta name="twitter:description" content="Generate professional LaTeX resumes from your GitHub, LinkedIn, and other profile data sources." />
+    <meta name="twitter:image" content="%PUBLIC_URL%/twitter-image.png" />
+    <meta name="twitter:creator" content="@airesumegen" />
+
+    <!-- Favicon and App Icons -->
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16x16.png" />
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <!-- Preconnect to External Domains for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+
+    <!-- Google Fonts - Inter for Modern Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind CSS CDN for Development (Replace with build process in production) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind CSS Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            200: '#c7d2fe',
+                            300: '#a5b4fc',
+                            400: '#818cf8',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            800: '#3730a3',
+                            900: '#312e81',
+                        },
+                        secondary: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            300: '#5eead4',
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-out',
+                        'slide-up': 'slideUp 0.3s ease-out',
+                        'bounce-gentle': 'bounceGentle 0.6s ease-in-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(100px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        bounceGentle: {
+                            '0%, 20%, 53%, 80%, 100%': { transform: 'translate3d(0,0,0)' },
+                            '40%, 43%': { transform: 'translate3d(0,-15px,0)' },
+                            '70%': { transform: 'translate3d(0,-7px,0)' },
+                            '90%': { transform: 'translate3d(0,-2px,0)' },
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px rgba(0, 0, 0, 0.08)',
+                        'medium': '0 8px 30px rgba(0, 0, 0, 0.12)',
+                        'hard': '0 20px 40px rgba(0, 0, 0, 0.15)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- jsPDF Library for PDF Generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
+            integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNhh/TCYFN7wfTYK8BqdA1q3MHWV6Z9rBEiP4Y/B7nQPV4GfK52LzDZvw=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+    <!-- Performance and Analytics -->
+    <script>
+        // Preload critical resources
+        window.addEventListener('load', function() {
+            // Preload API endpoint if configured
+            const apiUrl = localStorage.getItem('apiBaseUrl');
+            if (apiUrl) {
+                fetch(apiUrl, { method: 'OPTIONS' }).catch(() => {});
+            }
+        });
+
+        // Service Worker Registration for PWA (Optional)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .catch(function(error) {
+                        console.log('ServiceWorker registration failed: ', error);
+                    });
+            });
+        }
+    </script>
+
+    <!-- Custom CSS Variables -->
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            --secondary-gradient: linear-gradient(135deg, #059669 0%, #0d9488 100%);
+            --background-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        }
+
+        /* Loading Animation for Initial Page Load */
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--background-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.3s ease;
+        }
+
+        .page-loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Hide loader when React loads */
+        #root:not(:empty) + .page-loader {
+            display: none;
+        }
+    </style>
+
+    <!-- Page Title -->
+    <title>AI Resume Generator - Professional Resume Creation Tool</title>
+</head>
+<body>
+<!-- Skip to Main Content for Accessibility -->
+<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-primary-600 text-white px-4 py-2 rounded z-50">
+    Skip to main content
+</a>
+
+<!-- No Script Fallback -->
+<noscript>
+    <div style="text-align: center; padding: 50px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; font-family: Inter, sans-serif;">
+        <h1>🎯 AI Resume Generator</h1>
+        <p style="margin: 20px 0;">
+            This application requires JavaScript to function properly.
+            Please enable JavaScript in your browser settings and refresh the page.
+        </p>
+        <p>
+            <strong>Why JavaScript is needed:</strong><br>
+            • Interactive form handling<br>
+            • API communication for profile data<br>
+            • LaTeX resume generation<br>
+            • PDF download functionality
+        </p>
+    </div>
+</noscript>
+
+<!-- Main React Application Container -->
+<div id="root" role="main" aria-label="AI Resume Generator Application"></div>
+
+<!-- Page Loader (Hidden when React loads) -->
+<div class="page-loader" id="pageLoader">
+    <div class="text-center text-white">
+        <div class="loader-spinner mx-auto mb-4"></div>
+        <h2 class="text-xl font-semibold mb-2">AI Resume Generator</h2>
+        <p class="text-white/80">Loading application...</p>
+    </div>
+</div>
+
+<!-- Error Boundary Fallback -->
+<div id="error-fallback" style="display: none; text-align: center; padding: 50px; background: #fef2f2; color: #dc2626; font-family: Inter, sans-serif;">
+    <h1>⚠️ Application Error</h1>
+    <p>Something went wrong with the AI Resume Generator. Please refresh the page to try again.</p>
+    <button onclick="window.location.reload()" style="background: #dc2626; color: white; border: none; padding: 10px 20px; border-radius: 8px; margin-top: 20px; cursor: pointer;">
+        Refresh Page
+    </button>
+</div>
+
+<!-- Schema.org Structured Data for SEO -->
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI Resume Generator",
+        "description": "Generate professional LaTeX resumes from GitHub, LinkedIn, and other profile data sources",
+        "url": "https://ai-resume-generator.example.com",
+        "applicationCategory": "ProductivityApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "creator": {
+            "@type": "Organization",
+            "name": "AI Resume Generator Team"
+        },
+        "featureList": [
+            "GitHub Profile Integration",
+            "LinkedIn Data Scraping",
+            "LaTeX Resume Generation",
+            "PDF Export",
+            "Multiple Data Sources",
+            "Professional Templates"
+        ]
+    }
+</script>
+
+<!-- Global Error Handler -->
+<script>
+    window.addEventListener('error', function(e) {
+        console.error('Global error:', e.error);
+        // Optionally show error fallback
+        // document.getElementById('error-fallback').style.display = 'block';
+    });
+
+    window.addEventListener('unhandledrejection', function(e) {
+        console.error('Unhandled promise rejection:', e.reason);
+    });
+
+    // Hide page loader when DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            const loader = document.getElementById('pageLoader');
+            if (loader) {
+                loader.classList.add('hidden');
+                setTimeout(() => loader.remove(), 300);
+            }
+        }, 500);
+    });
+</script>
+
+<!-- Performance Monitoring (Optional) -->
+<script>
+    // Basic performance monitoring
+    window.addEventListener('load', function() {
+        if (window.performance) {
+            const loadTime = window.performance.timing.loadEventEnd - window.performance.timing.navigationStart;
+            console.log('Page load time:', loadTime + 'ms');
+
+            // Log to analytics service if configured
+            if (window.gtag) {
+                gtag('event', 'page_load_time', {
+                    'value': loadTime,
+                    'event_category': 'Performance'
+                });
+            }
+        }
+    });
+</script>
+</body>
+</html>
