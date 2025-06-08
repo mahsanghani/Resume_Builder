@@ -11,7 +11,7 @@ describe('Resume Generator Functions', () => {
     let myFunctions;
 
     before(() => {
-        myFunctions = require('../index');
+        myFunctions = require('../index.js');
     });
 
     after(() => {
