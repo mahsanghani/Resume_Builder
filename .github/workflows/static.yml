@@ -38,7 +38,7 @@ jobs:
       - name: Build React app
         run: |
           cd frontend
-          npm run build
+          CI=false npm run build
         env:
           PUBLIC_URL: /${{ github.event.repository.name }}
 
