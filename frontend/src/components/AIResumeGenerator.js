@@ -586,7 +586,7 @@ ${projectsSection}
     return (
         <div className="min-h-screen bg-gradient-to-br from-indigo-500 to-purple-600 p-4">
             <div className="max-w-4xl mx-auto">
-                <div className="bg-white rounded-2xl shadow-2xl min-h-[calc(100vh-2rem)]">
+                <div className="bg-white rounded-2xl shadow-2xl min-h-0">
                     {/* Header */}
                     <div className="bg-gradient-to-r from-indigo-600 to-purple-700 text-white p-8 rounded-t-2xl">
                         <div className="text-center">

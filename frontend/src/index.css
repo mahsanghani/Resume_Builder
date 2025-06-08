@@ -98,7 +98,7 @@ body {
 
 /* Main container */
 .app-container {
-    min-height: 100vh;
+    min-height: calc(100vh - 2rem);
     padding: 1.25rem;
     background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
 }
