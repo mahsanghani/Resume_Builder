@@ -33,7 +33,7 @@ jobs:
       - name: Install dependencies
         run: |
           cd frontend
-          npm ci --force
+          npm ci --legacy-peer-deps
 
       - name: Build React app
         run: |
